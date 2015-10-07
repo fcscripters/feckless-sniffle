@@ -2,6 +2,34 @@ var redis = require('redis');
 var client = redis.createClient();
 
 
-client.hmset('Conor', '10/09/2015', 'AngularJS', '11/09/2015', 'Bootstrap', '12/09/2015', 'Express');
+function db (){
 
-client.hmset( '10/09/2015', 'AngularJS', '11/09/2015', 'Bootstrap', '12/09/2015', 'Express');
+
+function addPostRedis (date, username, post){
+	client.hmset(date, username, post);	
+}
+
+
+function addDateToList (date){
+	client.rpush(["Dates", date]);	
+}
+
+
+
+function tenFromList (){
+	client.lrange('Dates', 0,10, function(err,reply){
+		console.log(reply);
+		return reply;
+	});
+}
+
+}
+
+function getPostByDate (date){
+	client.hgetall(date, function(err, object) {
+    	console.log(object + " TESTING");
+    	return object;
+	});
+}
+
+module.exports = db();
