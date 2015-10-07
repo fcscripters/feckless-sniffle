@@ -1,5 +1,8 @@
 # Twitter Clone Readme
 
+[![Build Status](https://travis-ci.org/fcscripters/feckless-sniffle.svg?branch=master)](https://travis-ci.org/fcscripters/feckless-sniffle)
+
+
 ## Client side
 
 Two pages:
@@ -28,6 +31,10 @@ Qunit
 Shot
 Istanbul
 Tape
+
+##Test
+Travis
+CodeCov
 
 ##Tasks for Pairs
 
