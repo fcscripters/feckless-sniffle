@@ -1,0 +1,32 @@
+{
+  "name": "feckless-sniffle",
+  "version": "1.0.0",
+  "description": "## Client side",
+  "main": "handler.js",
+  "scripts": {
+    "test": "./node_modules/.bin/tape ./test/* && npm run coverage",
+    "start": "node server.js",
+    "coverage": "./node_modules/.bin/istanbul cover test/*",
+    "codeclimate": "CODECLIMATE_REPO_TOKEN=1490496862c15c749746e00fe842a38ea2701b75b11ded7fdffb6b2588dbe6e1 codeclimate-test-reporter < ./coverage/lcov.info",
+    "nodemon": "./node_modules/.bin/nodemon ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcscripters/feckless-sniffle.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fcscripters/feckless-sniffle/issues"
+  },
+  "homepage": "https://github.com/fcscripters/feckless-sniffle#readme",
+  "dependencies": {
+    "redis": "^2.1.0",
+    "shot": "^1.7.0"
+  },
+  "devDependencies": {
+    "istanbul": "^0.3.22",
+    "shot": "^1.7.0",
+    "tape": "^4.2.1"
+  }
+}
