@@ -1,5 +1,6 @@
 var fs = require('fs');
 var index = fs.readFileSync(__dirname + '/public/index.html');
+var db = require('./database');
 
 module.exports = function handler(req, res) {
   console.log('im in the handler');
@@ -11,21 +12,27 @@ module.exports = function handler(req, res) {
     });
     res.write(index);
     res.end();
-  }else if(req.method === 'POST'){
-    console.log(req.url);
+  } else if(req.method === 'POST'){
     var url = req.url;
     var urlArray = url.split('/');
     var username = urlArray[2];
     var p = urlArray[3];
     var date = urlArray[4];
     var post = p.replace( /%(20)/g," ");
-    console.log('POST');
-    console.log(post);
-    console.log(username);
-    console.log(date);
-    res.end();
+    // db.addPostRedis(date,username,post);
+    // db.addDateToList(date);
+    db.tenFromList();
+    // console.log(db.tenFromList());
+    // res.write("---------before result is returned");
+    // res.write(results);
+    res.writeHead(200, {
+      "Content-Type": "text/html"
+    });
+
+    res.end("bye guys");
+
   }else if (req.method === 'DELETE') {
-    
+
 
 
   }
