@@ -29,6 +29,10 @@ Shot
 Istanbul
 Tape
 
+##Test
+Travis
+CodeCov
+
 ##Tasks for Pairs
 
 Client side Pages
