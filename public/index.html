@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>Feckless Sniffle</title>
       <!-- <link rel="stylesheet" href="main.css" charset="utf-8"> -->
+
 </head>
 
 <body>
@@ -58,7 +59,6 @@ console.log(storeNo);
 
       request.onreadystatechange = function() {
         if (request.readyState === 4) {
-
           array = JSON.parse(request.responseText);
            console.log(array);
 
@@ -72,14 +72,9 @@ console.log(storeNo);
         }
       };
 
-
-
-
       request.open('POST', "/post/" + username + '/' + post + '/' + Date.now() + '/'+ storeNo, true);
       request.send();
     });
-
-
   </script>
 </body>
 
