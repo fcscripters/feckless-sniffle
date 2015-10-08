@@ -21,78 +21,75 @@ module.exports = function handler(req, res) {
             var date = urlArray[4];
             var post = p.replace(/%(20)/g, " ");
 
-            client.hmset(date, username, post,date);
+            client.hmset(date, username, post);
             client.rpush(["Dates", date]);
 
 
             var listOfEntries;
             var results = [];
 
-          
 
 
-                function getRedisValue (callback){
+
+                      var messages = [];
                       client.lrange('Dates', 0, -1, function(err, reply) {
-                                
-                                         
-                                         client.hgetall(reply[0], function(err, message) { //gets one at a time
-                                         console.log(reply);
-                                         console.log(message);
-                                         res.write(JSON.stringify(message))
-                                         
-                                         callback (message);       
-                                }); 
-                                  
+
+                                    for (var i=0;i < reply.length; i ++){
+                                         client.hgetall(reply[i], function(err, message) { //gets one at a time
+
+                                           console.log(messages);
+                                           var message = res.write(JSON.stringify(message));
+                                           messages.push(message);
+                                           //console.log (messages);
+                                           //console.log (messages[i], 'messages[i]'');
+                                         });
+                                    }
+
                       });
-                }
-                
-                function forLoop() {
 
-                     reply.forEach(getRedisValue)
-                }
 
-                getRedisValue (null, forLoop);
+
 
 
            client.lrange('Dates', 0, -1, function(err, reply) {
-                      //var i =0; 
-                               
+                      //var i =0;
+
                                client.hgetall(reply[1], function(err, message) { //gets one at a time
                                console.log(reply.length);
                                res.write(JSON.stringify(message))
-                            
-                                       
-                      }); 
-                              
-                              
-                        
+
+
+                      });
+
+
+
             });
             client.lrange('Dates', 0, -1, function(err, reply) {
-                      //var i =0; 
-                               
+                      //var i =0;
+
                                client.hgetall(reply[2], function(err, message) { //gets one at a time
                                console.log(reply.length);
                                res.write(JSON.stringify(message))
-                             
-                                       
-                      }); 
+
+
+                      });
             });
 
 
             client.lrange('Dates', 0, -1, function(err, reply) {
-                      //var i =0; 
-                               
+                      //var i =0;
+
                                client.hgetall(reply[3], function(err, message) { //gets one at a time
                                console.log(reply.length);
                                res.write(JSON.stringify(message))
-                               res.end()  
-                                       
-                      }); 
+                               res.end()
+
+                      });
             });
-            
-          
-            
-        
+
+
+
+
 
 
 
