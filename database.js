@@ -11,6 +11,7 @@ var db = {};
 
 db.addDateToList = function(date, username, post, res) {
   client.rpush(["Dates", date]);
+
 };
 
 
@@ -23,7 +24,7 @@ db.tenFromList = function(date, username, post, res) {
       var frontarr = [];
       //console.log(db.getPostByDate(reply[i]));
       client.hgetall(reply[i], function(err, object) {
-        console.log((object) , " TESTING");
+        console.log(reply[i],(object) , " TESTING");
         frontarr.push(object);
         count++;
         if (count === 10) {

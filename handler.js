@@ -5,21 +5,29 @@ var index = fs.readFileSync(__dirname + '/public/index.html');
 var db = require('./database');
 
 module.exports = function handler(req, res) {
-  console.log('im in the handler');
+  console.log('im in the handler'+req.url);
 
-  if (req.method === 'GET') {
-    console.log('GET');
+  if (req.method === 'GET' && req.url === '/') {
+    console.log('GETyyyyyyy');
     res.writeHead(200, {
       "Content-Type": "text/html"
     });
     res.write(index);
     res.end();
-  } else if(req.method === 'POST'){
+  } else if(req.method === 'GET' && req.url === '/topten'){
+    db.tenFromList(date,username,post,res);
+
+
+  }
+  else if(req.method === 'POST'){
     var url = req.url;
     var urlArray = url.split('/');
     var username = urlArray[2];
     var p = urlArray[3];
     var date = urlArray[4];
+    var storeNo = urlArray[5];
+
+
     var post = p.replace( /%(20)/g," ");
     db.addPostRedis(date,username,post);
     db.addDateToList(date,username,post);
