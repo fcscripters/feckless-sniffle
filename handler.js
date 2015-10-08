@@ -1,3 +1,5 @@
+var redis = require('redis');
+var client = redis.createClient();
 var fs = require('fs');
 var index = fs.readFileSync(__dirname + '/public/index.html');
 var db = require('./database');
@@ -37,20 +39,21 @@ module.exports = function handler(req, res) {
 
 
   }
-  else{
-    fs.readFile(__dirname + req.url, function(err, file) {
-      if (err) {
-        res.writeHead(404, {
-          "Content-Type": "text/" + ext
-        });
 
-      } else {
-        var ext = req.url.split('.')[1];
-        res.writeHead(200, {
-          "Content-Type": "text/" + ext
+   else {
+        fs.readFile(__dirname + req.url, function(err, file) {
+            if (err) {
+                res.writeHead(404, {
+                    "Content-Type": "text/" + ext
+                });
+
+            } else {
+                var ext = req.url.split('.')[1];
+                res.writeHead(200, {
+                    "Content-Type": "text/" + ext
+                });
+                res.end(file);
+            }
         });
-        res.end(file);
-      }
-    });
-  }
+    }
 };

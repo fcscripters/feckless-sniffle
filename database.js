@@ -2,15 +2,16 @@ var redis = require('redis');
 var client = redis.createClient();
 var db = {};
 
-db.addPostRedis = function(date, username, post, res) {
-  client.hmset(date, username, post);
-};
+
+
+  db.addPostRedis = function(date, username, post, res) {
+    client.hmset(date, username, post);
+  };
 
 
 db.addDateToList = function(date, username, post, res) {
   client.rpush(["Dates", date]);
 };
-
 
 
 db.tenFromList = function(date, username, post, res) {
@@ -28,10 +29,9 @@ db.tenFromList = function(date, username, post, res) {
           res.end();
         }
       });
-    }
 
+    }
   });
 };
-
 
 module.exports = db;
