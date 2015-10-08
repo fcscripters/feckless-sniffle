@@ -19,9 +19,11 @@ module.exports = function handler(req, res) {
     var p = urlArray[3];
     var date = urlArray[4];
     var post = p.replace( /%(20)/g," ");
-    db.addPostRedis(date,username,post,res);
-    db.addDateToList(date,username,post,res);
+    db.addPostRedis(date,username,post);
+    db.addDateToList(date,username,post);
     db.tenFromList(date,username,post,res);
+
+
     // console.log(db.tenFromList());
     // res.write("---------before result is returned");
     // res.write(results);
