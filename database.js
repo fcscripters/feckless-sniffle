@@ -3,6 +3,8 @@ var client = redis.createClient();
 var db = {};
 
 
+
+/*
   db.addPostRedis = function(date, username, post, res) {
     client.hmset(date, username, post);
   };
@@ -16,8 +18,7 @@ var db = {};
 
   db.tenFromList = function(date, username, post, res) {
     client.lrange('Dates', 0, -1, function(err, reply) {
-      console.log(reply);
-			var pusharr = [];
+     	var pusharr = [];
 			for(var i = reply.length-1;i>reply.length-11;i--){
 				// console.log(db.getPostByDate(reply[i]));
         var last = false;
@@ -27,26 +28,24 @@ var db = {};
         pusharr.push(db.getPostByDate(last,reply[i],username,post,res));
 
 			}
-      // console.log(pusharr);
-
-			//return reply;
-			// console.log(pusharr);
-    });
+     });
 
 
 };
 
 db.getPostByDate = function(last, date, username, post, res) {
   client.hgetall(date, function(err, object) {
-    console.log(JSON.stringify(object) + " TESTING");
+    var output = JSON.stringify(object)
+    console.log(output + " TESTING");
     if (last===false){
-      res.write(JSON.stringify(object));
+      res.write(output);
     } else{
-      res.end();
+      res.end(output);
     }
 
 
   });
 };
-
+*/
+//module.exports = postRedisDisplay();
 module.exports = db;
