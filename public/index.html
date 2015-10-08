@@ -20,6 +20,14 @@
   <script type="text/javascript">
   var username = prompt('What is your username?');
 
+
+  console.log(localStorage.length);
+  if( localStorage.length === 0 ){
+    localStorage.setItem("storeNo", Date.now());
+  }
+  var storeNo = localStorage.storeNo;
+  console.log(storeNo);
+
   document.getElementById('submitPost').addEventListener('click', function(event){
     event.preventDefault();
     var post = document.getElementById('newPost').value;
