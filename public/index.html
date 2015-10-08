@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>Feckless Sniffle</title>
-      <link rel="stylesheet" href="main.css" charset="utf-8">
+  <link rel="stylesheet" href="main.css" charset="utf-8">
+  <link rel="shortcut icon" type="image/png" href="{{site.url}}/favicon.png">
 </head>
 
 <body>
@@ -20,8 +21,8 @@
     <h4>Dis is Da foota</h4>
   </div>
   <script type="text/javascript">
-  var username = prompt('What is your username?');
-  document.getElementById('submitPost').addEventListener('click', function(event) {
+    var username = prompt('What is your username?');
+    document.getElementById('submitPost').addEventListener('click', function(event) {
       event.preventDefault();
       var post = document.getElementById('newPost').value;
       var request = new XMLHttpRequest();
@@ -29,32 +30,25 @@
         if (request.readyState === 4) {
 
           object = JSON.parse(request.responseText);
-           //console.log(object)
+          //console.log(object)
 
-       var sniffles = document.getElementById('allSniffles')
+          var sniffles = document.getElementById('allSniffles')
 
-          for(var i = 0; i < object.length ; i++){
-                console.log(Object.keys(object[i]));
-                var allSniffles = document.getElementById('allSniffles');
-              allSniffles.innerHTML = "<div class='sniffles'>" + Object.keys(object[i])  +"<button>Delete </button></div>"
-
-
-
+          for (var i = 0; i < object.length; i++) {
+            console.log(Object.keys(object[i]));
+            var allSniffles = document.getElementById('allSniffles');
+            allSniffles.innerHTML = "<div class='sniffles'>" + Object.keys(object[i]) + "<button>Delete </button></div>"
           }
         }
       };
-
-
-    if (localStorage.length === 0) {
-      localStorage.setItem("storeNo", Date.now());
-    }
-    var storeNo = localStorage.storeNo;
+      if (localStorage.length === 0) {
+        localStorage.setItem("storeNo", Date.now());
+      }
+      var storeNo = localStorage.storeNo;
 
       request.open('POST', "/post/" + username + '/' + post + '/' + Date.now(), true);
       request.send();
     });
-
-
   </script>
 </body>
 
