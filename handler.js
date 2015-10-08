@@ -1,5 +1,5 @@
 var redis = require('redis');
-var client = redis.createClient();
+var client = require('./server.js');
 var fs = require('fs');
 var index = fs.readFileSync(__dirname + '/public/index.html');
 var db = require('./database');
