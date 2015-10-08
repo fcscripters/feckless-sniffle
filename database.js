@@ -20,13 +20,14 @@ db.tenFromList = function(date, username, post, res) {
     var pusharr = [];
     count = 0;
     for (var i = reply.length - 1; i > reply.length - 11; i--) {
+      var frontarr = [];
       //console.log(db.getPostByDate(reply[i]));
       client.hgetall(reply[i], function(err, object) {
-        console.log(JSON.stringify(object) + " TESTING");
-        res.write(JSON.stringify(object) + " TESTING");
+        console.log((object) , " TESTING");
+        frontarr.push(object);
         count++;
         if (count === 10) {
-          res.end();
+          res.end(JSON.stringify(frontarr));
         }
       });
 
