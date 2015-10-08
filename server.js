@@ -14,3 +14,4 @@ var index = fs.readFileSync(__dirname + '/public/index.html');
 var port = process.env.PORT || 8000;
 http.createServer(handler).listen(port);
 console.log('Server listening on'+ port);
+module.exports= client;

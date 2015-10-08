@@ -1,5 +1,5 @@
 var redis = require('redis');
-var client = redis.createClient();
+var client = require('server.js')
 var db = {};
 
 
