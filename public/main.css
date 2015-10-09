@@ -1,0 +1,41 @@
+body {
+  font-family: Futura ;
+  background-color: grey;
+}
+
+h2 {
+  font-size: 3em;
+  text-align: center;
+  margin: 0.1em;
+
+}
+.header p{
+  font-size: 1.5em;
+  text-align: center;
+}
+.sniffles{
+  border: 1px black solid;
+  margin: 0.25em;
+  background-color: green;
+}
+.username{
+  font-size: 2em;
+  margin: 0.1em;
+  text-align: center;
+}
+.sniffle{
+  font-size: 1.5em;
+  margin: 0.2em;
+  text-align: center;
+}
+.del{
+  text-align: center;
+}
+.submitPost{
+  font-size: 2em;
+  text-align: center;
+}
+.newPost{
+  font-size: 2em;
+  text-align: center;
+}

@@ -16,8 +16,6 @@ module.exports = function handler(req, res) {
     res.end();
   } else if(req.method === 'GET' && req.url === '/topten'){
     db.tenFromList(date,username,post,res);
-
-
   }
   else if(req.method === 'POST'){
     var url = req.url;
@@ -27,34 +25,24 @@ module.exports = function handler(req, res) {
     var date = urlArray[4];
     var storeNo = urlArray[5];
 
-
     var post = p.replace( /%(20)/g," ");
     db.addPostRedis(date,username,post);
     db.addDateToList(date,username,post);
     db.tenFromList(date,username,post,res);
-
-
-    // console.log(db.tenFromList());
-    // res.write("---------before result is returned");
-    // res.write(results);
     res.writeHead(200, {
       "Content-Type": "text/html"
     });
 
-
   }else if (req.method === 'DELETE') {
-
-
-
   }
-
    else {
-        fs.readFile(__dirname + req.url, function(err, file) {
+        fs.readFile(__dirname + '/public'+req.url, function(err, file) {
             if (err) {
                 res.writeHead(404, {
                     "Content-Type": "text/" + ext
                 });
-
+                console.log('error:'+err);
+                res.end();
             } else {
                 var ext = req.url.split('.')[1];
                 res.writeHead(200, {
