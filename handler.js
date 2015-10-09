@@ -5,16 +5,15 @@ var index = fs.readFileSync(__dirname + '/public/index.html');
 var db = require('./database');
 
 module.exports = function handler(req, res) {
-  console.log('im in the handler'+req.url);
 
   if (req.method === 'GET' && req.url === '/') {
-    console.log('GETyyyyyyy');
     res.writeHead(200, {
       "Content-Type": "text/html"
     });
     res.write(index);
     res.end();
   } else if(req.method === 'GET' && req.url === '/topten'){
+    console.log('is this get top ten req working');
     db.tenFromList(date,username,post,res);
   }
   else if(req.method === 'POST'){
@@ -26,14 +25,21 @@ module.exports = function handler(req, res) {
     var storeNo = urlArray[5];
 
     var post = p.replace( /%(20)/g," ");
-    db.addPostRedis(date,username,post);
+    db.addPostRedis(date,username,post,storeNo);
     db.addDateToList(date,username,post);
     db.tenFromList(date,username,post,res);
-    res.writeHead(200, {
-      "Content-Type": "text/html"
-    });
 
-  }else if (req.method === 'DELETE') {
+  }
+  else if (req.method === 'DELETE') {
+
+    var urlDel = req.url;
+    var urlArray2 = urlDel.split('/');
+    var deleteDate =  urlArray2[2];
+    // db.delPost(deleteDate);
+    // db.tenFromList(date,username,post,res);
+
+    console.log(deleteDate,req.url,req.method,'------');
+    console.log(urlDel,'---------del hand');
   }
    else {
         fs.readFile(__dirname + '/public'+req.url, function(err, file) {

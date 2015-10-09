@@ -18,46 +18,7 @@
   <div class="footer">
     <h4>We hope you have had a pleasent whine</h4>
   </div>
-  <script type="text/javascript">
-    var username = prompt('What is your username?');
-    if (localStorage.length === 0) {
-      localStorage.setItem("storeNo", Date.now());
-    }
-    var storeNo = localStorage.storeNo;
-    var req2 = new XMLHttpRequest();
-    req2.onreadystatechange = function() {
-      if (req2.readyState === 4) {
-        array = JSON.parse(req2.responseText);
-        var sniffles = document.getElementById('allSniffles')
-        for (var i = 0; i < array.length; i++) {
-          var allSniffles = document.getElementById('allSniffles');
-          allSniffles.innerHTML += "<div id = ''class='sniffles'> <p class ='username'>" + Object.keys(array[i])+"</p><p class = 'sniffle'>" + array[i][Object.keys(array[i])] + "</p><button class='del' onclick = 'deletePost()'>Delete </button></div>"
-        }
-      }
-    };
-    req2.open('GET', "/topten", true);
-    req2.send();
-
-    document.getElementById('submitPost').addEventListener('click', function(event) {
-      event.preventDefault();
-      var post = document.getElementById('newPost').value;
-      var request = new XMLHttpRequest();
-      request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-          array = JSON.parse(request.responseText);
-          console.log(array);
-          var sniffles = document.getElementById('allSniffles')
-          sniffles.innerHTML = "";
-          for (var i = 0; i < array.length; i++) {
-            var allSniffles = document.getElementById('allSniffles');
-            allSniffles.innerHTML += "<div id = ''class='sniffles'> <p class ='username'>" + Object.keys(array[i])+"</p><p class = 'sniffle'>" + array[i][Object.keys(array[i])] + "</p><button class='del' onclick = 'deletePost()'>Delete </button></div>"
-          }
-
-        }
-      };
-      request.open('POST', "/post/" + username + '/' + post + '/' + Date.now() + '/' + storeNo, true);
-      request.send();
-    });
+  <script src="frontend.js">
   </script>
 </body>
 
