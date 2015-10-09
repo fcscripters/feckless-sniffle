@@ -1,3 +1,5 @@
+To view feckless sniffle online, go to https://agile-inlet-7233.herokuapp.com/
+
 # Twitter Clone Readme
 
 [![Build Status](https://travis-ci.org/fcscripters/feckless-sniffle.svg?branch=master)](https://travis-ci.org/fcscripters/feckless-sniffle)
