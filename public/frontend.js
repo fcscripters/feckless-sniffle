@@ -50,12 +50,12 @@ function removeRedis(id){
     if (req2.readyState === 4) {
       array = JSON.parse(req2.responseText);
       var sniffles = document.getElementById('allSniffles')
-      for (var i = 0; i < array.length; i++) {
-        var allSniffles = document.getElementById('allSniffles');
-        var newDate = parseInt(array[i].date);
-        var dateHuman = new Date(newDate).toString().slice(0,25);
-        allSniffles.innerHTML += "<div class='sniffles'> <p class ='username'>" + array[i].username+"</p><p class = 'sniffle'>" + array[i].post + "</p><p class ='date'>"+dateHuman+"</p><button class='del' id ="+array[i].date+" onclick = 'removeRedis(this.id)'>Delete</button></div>"
-      }
+      // for (var i = 0; i < array.length; i++) {
+      //   var allSniffles = document.getElementById('allSniffles');
+      //   var newDate = parseInt(array[i].date);
+      //   var dateHuman = new Date(newDate).toString().slice(0,25);
+      //   allSniffles.innerHTML += "<div class='sniffles'> <p class ='username'>" + array[i].username+"</p><p class = 'sniffle'>" + array[i].post + "</p><p class ='date'>"+dateHuman+"</p><button class='del' id ="+array[i].date+" onclick = 'removeRedis(this.id)'>Delete</button></div>"
+      // }
     }
   };
 
