@@ -1,4 +1,10 @@
 var username = prompt('What is your username?');
+
+  while(username === ""){
+    username = prompt('Please enter a username.');
+    console.log(username);
+  }
+
 if (localStorage.length === 0) {
   localStorage.setItem("storeNo", Date.now());
 }
