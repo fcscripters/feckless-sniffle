@@ -5,62 +5,56 @@ var index = fs.readFileSync(__dirname + '/public/index.html');
 var db = require('./database');
 
 module.exports = function handler(req, res) {
-  console.log('im in the handler'+req.url);
 
+    
+    var url = req.url;
+    var urlArray = url.split('/');
+    var username = urlArray[2];
+    var post = urlArray[3];
+    var date = urlArray[4];
+    var storeNo = urlArray[5];
 
 
   if (req.method === 'GET' && req.url === '/') {
-    console.log('GETyyyyyyy');
     res.writeHead(200, {
       "Content-Type": "text/html"
     });
     res.write(index);
     res.end();
 
-  } else if (req.method === 'GET' && req.url ==='/topTen'){
+  } else if(req.method === 'GET' && req.url === '/topten'){
+    console.log('is this get top ten req working');
+    db.tenFromList(date,username,post,res);
 
-    res.end(db.tenFromList(date,username,post,res));
+  
+  } else if(req.method === 'POST'){
 
-
-  }else if(req.method === 'POST'){
-
-    var url = req.url;
-    var urlArray = url.split('/');
-    var username = urlArray[2];
-    var p = urlArray[3];
-    var date = urlArray[4];
-    var storeNo = urlArray[5];
-
-
-    var post = p.replace( /%(20)/g," ");
+    post = post.replace( /%(20)/g," ");
+ 
     db.addPostRedis(date,username,post,storeNo);
     db.addDateToList(date,username,post);
     db.tenFromList(date,username,post,res);
+    
 
+  } else if (req.method === 'DELETE') {
 
-    // console.log(db.tenFromList());
-    // res.write("---------before result is returned");
-    // res.write(results);
-    res.writeHead(200, {
-      "Content-Type": "text/html"
-    });
- } else if (req.method === 'GET' && req.url === '/Delete'){
+    var urlDel = req.url;
+    var urlArray2 = urlDel.split('/');
+    var deleteDate =  urlArray2[2];
+    // db.delPost(deleteDate);
+    // db.tenFromList(date,username,post,res);
 
-    console.log("redis delete >>>>>>>>>> handler");
-    db.delPost(date)
-    res.end(db.tenFromList(date,username,post,res))
-
-
-
- }
-
-   else {
-        fs.readFile(__dirname + req.url, function(err, file) {
+    console.log(deleteDate,req.url,req.method,'------');
+    console.log(urlDel,'---------del hand');
+  
+  } else {
+        fs.readFile(__dirname + '/public'+req.url, function(err, file) {
             if (err) {
                 res.writeHead(404, {
                     "Content-Type": "text/" + ext
                 });
-
+                console.log('error:'+err);
+                res.end();
             } else {
                 var ext = req.url.split('.')[1];
                 res.writeHead(200, {
@@ -71,3 +65,8 @@ module.exports = function handler(req, res) {
         });
     }
 };
+
+
+
+
+

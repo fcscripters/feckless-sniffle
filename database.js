@@ -28,9 +28,9 @@ db.tenFromList = function(date, username, post, res) {
     count = 0;
     for (var i = reply.length - 1; i > reply.length - 11; i--) {
       var frontarr = [];
-      //console.log(db.getPostByDate(reply[i]));
+     
       client.hgetall(reply[i], function(err, object) {
-        console.log(reply[i],(object) , " TESTING");
+        console.log(reply[i],(object) , " in ten tenFromList");
         frontarr.push(object);
         count++;
         if (count === 10) {
@@ -41,5 +41,8 @@ db.tenFromList = function(date, username, post, res) {
     }
   });
 };
+ 
+
+
 
 module.exports = db;
