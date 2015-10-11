@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>QUnit Example</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-1.18.0.css">
+</head>
+
+<body>
+    <iframe src="index.html" width="100%" height="500px" id="iframe" frameborder="0"> </iframe>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-1.18.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- <script src="tests.js"></script> -->
+    <script>
+    var iframe = document.getElementById('iframe');
+    var target = iframe.contentWindow.document || iframe.contentDocument;
+    var inputDiv, inputBox, sendButton, f;
+    inputDiv = target.getElementsByClassName('inputDiv')[0];
+
+
+    test('input elements exist', function(assert) {
+        assert.ok(inputDiv, "inputDiv exists");
+        inputBox = target.getElementById('newPost');
+        assert.ok(inputBox, "inputBox exists");
+        submitButton = target.getElementById('submitPost');
+        assert.ok(submitButton, "submit button exists");
+    });
+
+
+
+
+    test('Has post button been been clicked. You have to physically click the submit button within the first 3 seconds to make this test pass', function(assert) {
+        var done = assert.async();
+    
+       
+        	var clicked = false;
+            var submitButton = target.getElementById('submitPost');
+            
+       submitButton.addEventListener("click", function() {
+               clicked = true;
+               console.log( clicked);
+               
+       });
+
+        setTimeout(function() {
+           assert.equal(clicked, true, 'submit post Button has been clicked');
+
+           done();
+         
+        }, 3000);
+    });
+
+
+    /*test('Check for input entered in post box', function(assert) {
+        var iframe = document.getElementById('iframe');
+        var target = iframe.contentDocument || iframe.contentWindow.document;
+        var done = assert.async();
+        var input;
+        setTimeout(function() {
+            var char = target.getElementById('submitPost').value;
+            if (char.length != 0) {
+                input = true;
+            }
+            console.log(input);
+            done();
+            assert.equal(input, true, 'Input in post field');
+        }, 2000);
+    });
+
+
+
+    //javascript variables  document.getElementById('iframe').contentWindow["name"];
+    test('Input typed in username box', function(assert) {
+        var iframe = document.getElementById('iframe');
+        var target = iframe.contentDocument || iframe.contentWindow.document;
+        var done = assert.async();
+        setTimeout(function() {
+            var char = document.getElementById('');
+            if (char) {
+                charValue = true;
+            }
+            assert.equal(charValue, true, 'Search Button has been clicked');
+            done();
+        }, 2000);
+    });*/
+
+    </script>
+</body>
+
+</html>
