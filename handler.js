@@ -41,9 +41,8 @@ module.exports = function handler(req, res) {
     var urlDel = req.url;
     var urlArray2 = urlDel.split('/');
     var deleteDate =  urlArray2[2];
-    // db.delPost(deleteDate);
-    // db.tenFromList(date,username,post,res);
-
+    db.delPost(deleteDate, username, post, res);
+   
     console.log(deleteDate,req.url,req.method,'------');
     console.log(urlDel,'---------del hand');
   
