@@ -5,9 +5,9 @@ var client = redis.createClient(process.env.REDIS_URL, {
 var db = {};
 
 
-  db.addPostRedis = function(date, username, post, storeNo, res) {
+db.addPostRedis = function(date, username, post, storeNo, res) {
     client.hmset(date, "Username", username, "post", post, "storeNo", storeNo, "date", date );
-  }
+}
 
 
 db.addDateToList = function(date, username, post, res) {
@@ -17,8 +17,7 @@ db.addDateToList = function(date, username, post, res) {
 
 
 db.delPost = function(date, username, post, res) {
-
-    client.del(date, function(err, reply) {
+       client.del(date, function(err, reply) {
        console.log(reply + " in delete function");
     });
 };

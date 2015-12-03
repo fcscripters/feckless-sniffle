@@ -64,3 +64,4 @@ function removeRedis(id){
 
   req3.open('DELETE', "/delete" +'/'+id , true);
   req3.send();
+}
