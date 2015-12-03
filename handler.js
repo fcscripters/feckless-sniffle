@@ -6,42 +6,47 @@ var db = require('./database');
 
 module.exports = function handler(req, res) {
 
+    
+    var url = req.url;
+    var urlArray = url.split('/');
+    var username = urlArray[2];
+    var post = urlArray[3];
+    var date = urlArray[4];
+    var storeNo = urlArray[5];
+
+
   if (req.method === 'GET' && req.url === '/') {
     res.writeHead(200, {
       "Content-Type": "text/html"
     });
     res.write(index);
     res.end();
+
   } else if(req.method === 'GET' && req.url === '/topten'){
     console.log('is this get top ten req working');
     db.tenFromList(date,username,post,res);
-  }
-  else if(req.method === 'POST'){
-    var url = req.url;
-    var urlArray = url.split('/');
-    var username = urlArray[2];
-    var p = urlArray[3];
-    var date = urlArray[4];
-    var storeNo = urlArray[5];
 
-    var post = p.replace( /%(20)/g," ");
+  
+  } else if(req.method === 'POST'){
+
+    post = post.replace( /%(20)/g," ");
+ 
     db.addPostRedis(date,username,post,storeNo);
     db.addDateToList(date,username,post);
     db.tenFromList(date,username,post,res);
+    
 
-  }
-  else if (req.method === 'DELETE') {
+  } else if (req.method === 'DELETE') {
 
     var urlDel = req.url;
     var urlArray2 = urlDel.split('/');
     var deleteDate =  urlArray2[2];
-    // db.delPost(deleteDate);
-    // db.tenFromList(date,username,post,res);
-
+    db.delPost(deleteDate, username, post, res);
+   
     console.log(deleteDate,req.url,req.method,'------');
     console.log(urlDel,'---------del hand');
-  }
-   else {
+  
+  } else {
         fs.readFile(__dirname + '/public'+req.url, function(err, file) {
             if (err) {
                 res.writeHead(404, {
@@ -59,3 +64,8 @@ module.exports = function handler(req, res) {
         });
     }
 };
+
+
+
+
+
